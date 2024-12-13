@@ -88,8 +88,6 @@ def create_qa_chain(vector_store):
         llm = ChatGroq(
             model="llama-3.3-70b-versatile",
             temperature=0,
-            max_tokens=None,
-            timeout=None,
             max_retries=2
         )
         retriever = vector_store.as_retriever(
@@ -180,7 +178,7 @@ class PDFProcessor:
             # Format source documents
             sources = []
             for doc in response['source_documents']:
-                sources.append(f"Page {doc.metadata.get('page', 'N/A')}: {doc.page_content[:200]}...")
+                sources.append(f"Page {doc.metadata.get('page', 'N/A')}: {doc.page_content[:500]}...")
             
             return response['result'], sources
         
